@@ -109,34 +109,34 @@ for eps in range(EPISODES):
     elp=0
     while not done:
         env.render()
-        #if EPSILON >= np.random.rand():
-        #    exp +=1
-        #    action = random.randrange(action_size) 
-        #else:
+        if EPSILON >= np.random.rand():
+            exp +=1
+            action = random.randrange(action_size) 
+        else:
         elp +=1
         action = np.argmax(agent.get_q(state)[0])
         new_state, reward, done, _ = env.step(action)
         new_state = np.reshape(new_state,[1, state_size])
-        #reward = reward if not done else -100
-        #REPLAY_MEMORY.append((state,reward,action,new_state,done))
+        reward = reward if not done else -100
+        REPLAY_MEMORY.append((state,reward,action,new_state,done))
         state = new_state
         time += 1
     env.close()
-    #x.append([eps,exp,elp,time,EPSILON])
+    x.append([eps,exp,elp,time,EPSILON])
     y.append(time)
     z.append(eps)
     update_graph(z,y)
-    #if (len(REPLAY_MEMORY)) >= MINIBATCH:
-    #    agent.train(MINIBATCH)
-    #    if EPSILON > MIN_EPSILON:
-    #        EPSILON *= DECAY_RATE
-    #if eps % 50 == 0:
-    #    agent.predict_save(output_dir + "predict_weights_" + '{:04d}'.format(eps) + ".hdf5")
-    #    agent.fit_save(output_dir + "fit_weights_" + '{:04d}'.format(eps) + ".hdf5")
-    #with open("score_vs_eps.txt", "w") as output:
-    #    output.write("Episodes"+"   "+"Exploration"+"   " + "Exploitation" + "  "+ "Score" + "  " + "Epsilon"+"\n")
-    #    for eps,exp,elp,time,epsilon in x:
-    #        output.write("      "+str(eps)+"        "+str(exp)+"        "+str(elp)+"        "+str(time)+"       "+"{:.4f}".format(epsilon) +"\n")
+    if (len(REPLAY_MEMORY)) >= MINIBATCH:
+        agent.train(MINIBATCH)
+        if EPSILON > MIN_EPSILON:
+            EPSILON *= DECAY_RATE
+    if eps % 50 == 0:
+        agent.predict_save(output_dir + "predict_weights_" + '{:04d}'.format(eps) + ".hdf5")
+        agent.fit_save(output_dir + "fit_weights_" + '{:04d}'.format(eps) + ".hdf5")
+    with open("score_vs_eps.txt", "w") as output:
+        output.write("Episodes"+"   "+"Exploration"+"   " + "Exploitation" + "  "+ "Score" + "  " + "Epsilon"+"\n")
+        for eps,exp,elp,time,epsilon in x:
+            output.write("      "+str(eps)+"        "+str(exp)+"        "+str(elp)+"        "+str(time)+"       "+"{:.4f}".format(epsilon) +"\n")
 
 #agent.predict_model.save('CartPole_predict_model')
 #agent.predict_model.save('CartPole_fit_model')
