@@ -1,0 +1,1 @@
+This folder is a complete guide on how to automate the flappybird game using deep Q-learning. The game has been developed using the pythons pygame module. Implementation of Q-learning is still in development phase. Anyone who wants to contribute is welcomed here.   
