@@ -38,7 +38,17 @@ The agent recieves the reward (score) 1 for being balanced.
 Our aim is to keep the pole vertically balanced until the score of 200 is reached. This problem can be cosidered solved if we achieve the average score of 195+ over the  course 100 consecutive episodes.
 
 
-# Implementation of DQN #
+# Implementation of DQN algorithm #
 
-I have used the Q learning algorithm to train, reward and penalize the model. It is a model free approach. 
+I have used the Q learning algorithm to train, reward and penalize the model. It is a model free approach. Unlike Q-learning algorithm, we do not have to creat a table for remebering the actions and their rewards in certain state of the agent. In DQN we try to train a nueral network to predict the actions for the agent to perform. Here are the steps to train the model:
+
+- Initially, the NN-model predicts the action randomly, then agent performs that action. Actually the model predicts the Q-values of all the possible actions and agent performs action with higher Q-value. 
+- Based on the performance of agent, we get new state of the agent with certain rewards for the previous action.
+- Positive reward for maintaining the balance and negative for falling (may change in other cases).
+- We also take account of future actions while assigning positive reward to the model. For this, we use the model again to predict the action for the new state and based on that get the Q-value(most probable new action), multiply it with certain learning rate (gamma) and add it to the reward.  
+- We appned the new_state, reward, previous_state in a python deque of certain length.
+- When the python deque completely filled with these datas, then we randomly select some datas and make a batch of certain batch_size.
+- Then these datas in a batch are feeded to the neural network for training.
+- The intuition behind giving the negative reward means that, we will neglect these actions for the particular situation. Since, the agent always perform action which has higher Q-value, negative reward will automatically decrease the Q-value for bad actions.
+-  This whole scheme of training the model is called as training via replay memory. Updt          
 
