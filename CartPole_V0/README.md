@@ -43,12 +43,56 @@ Our aim is to keep the pole vertically balanced until the score of 200 is reache
 I have used the Q learning algorithm to train, reward and penalize the model. It is a model free approach. Unlike Q-learning algorithm, we do not have to creat a table for remebering the actions and their rewards in certain state of the agent. In DQN we try to train a nueral network to predict the actions for the agent to perform. Here are the steps to train the model:
 
 - Initially, the NN-model predicts the action randomly, then agent performs that action. Actually the model predicts the Q-values of all the possible actions and agent performs action with higher Q-value. 
-- Based on the performance of agent, we get new state of the agent with certain rewards for the previous action.
+- Based on the performance of agent, we get new state of the agent with certain reward for the previous action.
 - Positive reward for maintaining the balance and negative for falling (may change in other cases).
 - We also take account of future actions while assigning positive reward to the model. For this, we use the model again to predict the action for the new state and based on that get the Q-value(most probable new action), multiply it with certain learning rate (gamma) and add it to the reward.  
 - We appned the new_state, reward, previous_state in a python deque of certain length.
 - When the python deque completely filled with these datas, then we randomly select some datas and make a batch of certain batch_size.
 - Then these datas in a batch are feeded to the neural network for training.
 - The intuition behind giving the negative reward means that, we will neglect these actions for the particular situation. Since, the agent always perform action which has higher Q-value, negative reward will automatically decrease the Q-value for bad actions.
--  This whole scheme of training the model is called as training via replay memory. Updt          
+-  This whole scheme of training the model is called as training via replay memory.         
 
+
+### Basic Q-learning algorithm : ###
+```
+initialize deque, EPSILON, learning_rate(gamma)
+for episode in EPISODES:
+    state = env.reset()                                                      # reset the environment
+    while not done:
+        if(EPSILON>=random_value):                                           # 0<= random_value <=1
+            action = random(action_space)                                    # perform any action randomly from action  
+        else:
+            action = max(model.predict(state))
+        new_state, reward, done, _ = env.step(action)            # agent performs the action using step() function and we get new state, reward and a boolean
+        if not done:
+            reward = reward + gamma*[max(model.predict(new_state))]
+        else :
+            reward = -10
+        deque.append([state,reward, new_state, action, done])
+        
+        state = new_state
+       
+        if(length(deque)>=MINIBATCH):                                         # training the model
+            minibatch = random.sample(deque, batch_size)
+            model.fit(minibatch)
+            EPSILON *= DECAY_RATE
+            
+```
+
+# Exploitation vs Exploration #
+
+Initially, the agent explores the environment more by performing some random actions. This is called *exploration*. As the learning proceeds, the agent performs action more based on prediction from the NN model. This is called *exploitation*. So, how do we ensure exploration is decreasing and exploitation is increasing throughout the learning? I have used the *Epsilon-greedy method* for this. How:
+
+- I initialized a variable EPSILON = 1 and a DECAY_RATE as 0.995.
+- As the training occurs, the value of epsilon decays as *EPSILON*DECAY_RATE*
+- As the EPSILON decreases, the agent shifts from random exploration to exploitation based on training of NN model. 
+
+
+
+
+
+
+
+
+Note : complete result of this project will be updated soon.
+            
