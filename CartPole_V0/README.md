@@ -7,7 +7,7 @@ Anyone who wants to contribute is welcomed here.
 
 Google's open AI gym module provides the Cartpole environment. It consists of a cart(shown in black color) and a vertical bar attached to the cartusing passive pivot joint. The cart can move left or right.The problem is to prevent the vertical bar from falling bymoving the car left or right. Below is the gif of the system:
 
-<img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/gym_animation.gif" width="350" height="250" />
+<img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/gym_animation.gif" width="500" height="350" />
 
 ### State vector of the system is a four dimensional vector having components: ###
 
@@ -84,15 +84,29 @@ for episode in EPISODES:
 Initially, the agent explores the environment more by performing some random actions. This is called *exploration*. As the learning proceeds, the agent performs action more based on prediction from the NN model. This is called *exploitation*. So, how do we ensure exploration is decreasing and exploitation is increasing throughout the learning? I have used the *Epsilon-greedy method* for this. How:
 
 - I initialized a variable EPSILON = 1 and a DECAY_RATE as 0.995.
-- As the training occurs, the value of epsilon decays as *EPSILON*DECAY_RATE*
+- As the training occurs, the value of epsilon decays as EPSILON*DECAY_RATE. 
 - As the EPSILON decreases, the agent shifts from random exploration to exploitation based on training of NN model. 
 
+       
+#### Below graph shows the variation of EPSILON per episode: ####
+
+<img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/graphs/epsilon_vs_episodes.png" width="550" height="350" />
+
+
+         
+#### Below graph shows how number of exploration/exploitation varies per episode: ####
+
+<img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/graphs/exploitation-exploration_vs_episodes.png" width="550" height="350" />
+
+#### Below graph shows the variation of score per episode: ####
+ 
+<img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/graphs/score_vs_episodes.png" width="550" height="350" />
 
 
 
+#### Below graph shows the variation of average_score per episode: ####
+<img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/graphs/avg-score_vs_episode.png" width="550" height="350" />
 
 
 
-
-Note : complete result of this project will be updated soon.
             
