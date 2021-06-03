@@ -132,6 +132,6 @@ Initially, the agent explores the environment more by performing some random act
 
 <img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/gifs/1300_episodes.gif" width="300" height="180" title = "1300_episodes" />   <img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/gifs/1950_episodes.gif" width="300" height="180" title = "1950_episodes" />  
 
-After the end of 1950th episode training, the agent (pole) is quite able to balance itself using the trained model. Although the model requires the hyperparameter tuning, so that it can quickly using in less number of episodes. 
+After the end of 1950th episode training, the agent (pole) is quite able to balance itself using the trained model. Although the model requires the hyperparameter tuning, so that it can learn quickly in less number of episodes. 
 
 *Note: I am curently working on hyperparameter tuning to make it more optimal. Anyone who wants to contribute is welcomed here :)
