@@ -28,7 +28,7 @@ So the cart can move either left or right in order to keep the pole balanced ver
 
 Maximum score or episode length in this system is 200. The game terminates if:
 
-- The pole angle is more than ±12 degrees from thevertical axis.
+- The pole angle is more than ±12 degrees from the vertical axis.
 - The cart position is more than ±2.4cm from the centre.
 - The episode length is greater than 200.
 
