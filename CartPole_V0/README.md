@@ -5,7 +5,7 @@ Anyone who wants to contribute is welcomed here.
 
 # Introduction: #
 
-Google's open AI gym module provides the Cartpole environment. It consists of a cart(shown in black color) and a vertical bar attached to the cartusing passive pivot joint. The cart can move left or right.The problem is to prevent the vertical bar from falling bymoving the car left or right. Below is the gif of the system:
+Google's open AI gym module provides the Cartpole environment. It consists of a cart(shown in black color) and a vertical bar attached to the cart using a pivot joint. The cart can move left or right. We have to prevent the vertical bar from falling by moving the car left or right. Below is the gif of the environment:
 
 <img src="https://github.com/UJ5/Reinforcement_learning/blob/main/CartPole_V0/gym_animation.gif" width="500" height="350" />
 
